@@ -1294,7 +1294,7 @@
                     <li><a href="#mission">Mission</a></li>
                     <li><a href="#galerie">Galerie</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#don" class="nav-cta">Faire un don</a></li>
+                  <!--  <li><a href="#don" class="nav-cta">Faire un don</a></li> --> 
                 </ul>
             </nav>
         </div>
@@ -1311,7 +1311,7 @@
                 et de generosite. A Mbour, nous agissons concretement pour ceux qui en ont besoin.
             </p>
             <div class="hero-buttons">
-                <a href="#don" class="btn btn-primary">Faire un don</a>
+                <!-- <a href="#don" class="btn btn-primary">Faire un don</a> -->
                 <a href="#hommage" class="btn btn-outline">Decouvrir notre histoire</a>
             </div>
            <!-- <p class="hero-location">Mbour, Senegal</p> -->
@@ -1612,7 +1612,7 @@
                             </div>
                             <div>
                                 <h4>Telephone</h4>
-                                <p><a href="tel:+221773964246">+221 77 396 42 46</a></p>
+                                <p><a href="tel:+221773203770">+221 77 320 37 70</a></p>
                             </div>
                         </div>
                         <div class="contact-info-item">
@@ -1627,17 +1627,18 @@
                     </div>
                 </div>
                 <div class="contact-form fade-in">
-                    <h3>Envoyez-nous un message</h3>
+                    <h3>Envoyez-nous un message par WhatsApp</h3>
                     <form id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="name">Nom complet</label>
+                                <label for="name">Votre nom</label>
                                 <input type="text" id="name" placeholder="Votre nom" required>
                             </div>
-                            <div class="form-group">
+                        <!--   <div class="form-group">
                                 <label for="phone">Telephone</label>
                                 <input type="tel" id="phone" placeholder="Votre numero">
                             </div>
+                        -->
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -1687,7 +1688,7 @@
                 <div class="footer-col">
                     <h4>Actions</h4>
                     <ul>
-                        <li><a href="#don">Faire un don</a></li>
+                     <!--  <li><a href="#don">Faire un don</a></li>--> 
                         <li><a href="#contact">Nous contacter</a></li>
                         <li><a href="#mission">Devenir benevole</a></li>
                     </ul>
@@ -1695,7 +1696,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul>
-                        <li><a href="tel:+221773964246">+221 77 396 42 46</a></li>
+                        <li><a href="tel:+221773203770">+221 77 320 37 70</a></li>
                         <li><a>Mbour, Senegal</a></li>
                     </ul>
                 </div>
@@ -1821,7 +1822,7 @@
 
             // Construct WhatsApp or SMS message
             const text = `Bonjour, je suis ${name}. ${message} (Tel: ${phone})`;
-            const waLink = `https://wa.me/221773964246?text=${encodeURIComponent(text)}`;
+            const waLink = `https://wa.me/221773203770?text=${encodeURIComponent(text)}`;
             window.open(waLink, '_blank');
         });
 
