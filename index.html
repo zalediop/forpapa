@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensemble pour L'Humain — Un Don, Un Sourire</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-green: #1a3c2a;
+            --warm-green: #2d6a4f;
+            --soft-green: #40916c;
+            --light-green: #b7e4c7;
+            --pale-green: #d8f3dc;
+            --cream: #f5f7f0;
+            --gold: #c8a84e;
+            --dark-gold: #a67c00;
+            --white: #ffffff;
+            --dark: #1a1a1a;
+            --grey-text: #4a4a4a;
+            --light-grey: #e8e8e8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            line-height: 1.7;
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--deep-green);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--grey-text);
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: var(--deep-green);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.15);
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 18px;
+            padding-bottom: 18px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .logo-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .logo-slogan {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--white);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--deep-green) !important;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            transition: background 0.3s, transform 0.3s !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--dark-gold);
+            transform: translateY(-2px);
+            color: var(--white) !important;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(160deg, var(--deep-green) 0%, #0f2b1c 40%, #1a3c2a 100%);
+            overflow: hidden;
+            padding: 120px 24px 100px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200,168,78,0.08) 0%, transparent 70%);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(45,106,79,0.15) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-memorial {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 30px;
+            display: inline-block;
+            border: 1px solid rgba(200,168,78,0.3);
+            padding: 10px 30px;
+            border-radius: 50px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--gold);
+        }
+
+        .hero-slogan {
+            font-size: 1.4rem;
+            color: var(--light-green);
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 580px;
+            margin: 0 auto 45px;
+            line-height: 1.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--deep-green);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-gold);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(200,168,78,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-3px);
+        }
+
+        .hero-location {
+            margin-top: 60px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ===== ABOUT / HOMMAGE ===== */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, var(--pale-green), var(--light-green));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image-placeholder .placeholder-icon {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 3px solid var(--warm-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image-placeholder .placeholder-icon svg {
+            width: 200px;
+            height: 200px;
+            fill: var(--warm-green);
+        }
+
+        .about-image-placeholder span {
+            font-size: 0.85rem;
+            color: var(--warm-green);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .about-image-accent {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 180px;
+            height: 180px;
+            border: 3px solid var(--gold);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .about-content .section-subtitle {
+            margin-bottom: 30px;
+        }
+
+        .about-values {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .about-value {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .about-value-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 12px;
+            background: var(--pale-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-value-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--warm-green);
+        }
+
+        .about-value h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--deep-green);
+            margin-bottom: 4px;
+        }
+
+        .about-value p {
+            font-size: 0.9rem;
+            color: var(--grey-text);
+            line-height: 1.6;
+        }
+
+        /* ===== MISSION / ACTIONS ===== */
+        .mission {
+            background: var(--cream);
+        }
+
+        .mission-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .mission-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 45px 35px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--light-grey);
+        }
+
+        .mission-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            border-color: transparent;
+        }
+
+        .mission-card-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: var(--pale-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .mission-card-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--warm-green);
+        }
+
+        .mission-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--deep-green);
+            margin-bottom: 12px;
+        }
+
+        .mission-card p {
+            font-size: 0.92rem;
+            color: var(--grey-text);
+            line-height: 1.7;
+        }
+
+        /* ===== STATS BAR ===== */
+        .stats {
+            background: var(--deep-green);
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--pale-green), var(--light-green));
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .gallery-item .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(26,60,42,0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .gallery-placeholder-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--warm-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+        }
+
+        .gallery-placeholder-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--warm-green);
+        }
+
+        .gallery-placeholder-text {
+            font-size: 0.75rem;
+            color: var(--warm-green);
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        /* ===== DONATE ===== */
+        .donate {
+            background: linear-gradient(160deg, var(--deep-green), #0f2b1c);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donate::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200,168,78,0.06) 0%, transparent 70%);
+        }
+
+        .donate .section-label {
+            color: var(--gold);
+        }
+
+        .donate .section-title {
+            color: var(--white);
+        }
+
+        .donate .section-subtitle {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .donate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .donate-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .donate-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .donate-card.featured {
+            background: rgba(200,168,78,0.1);
+            border-color: var(--gold);
+            position: relative;
+        }
+
+        .donate-card.featured::before {
+            content: 'POPULAIRE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--deep-green);
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 5px 20px;
+            border-radius: 50px;
+        }
+
+        .donate-amount {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .donate-currency {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .donate-desc {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .donate-card .btn {
+            width: 100%;
+            padding: 14px 30px;
+        }
+
+        .donate-custom {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .donate-custom p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .donate-custom-form {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .donate-custom-form input {
+            padding: 16px 24px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            width: 250px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .donate-custom-form input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .donate-custom-form input:focus {
+            border-color: var(--gold);
+        }
+
+        .donate-info {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            z-index: 2;
+        }
+
+        .donate-info p {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .donate-info strong {
+            color: var(--gold);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .contact-info-icon {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 14px;
+            background: var(--pale-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-info-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--warm-green);
+        }
+
+        .contact-info-item h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--soft-green);
+            margin-bottom: 4px;
+        }
+
+        .contact-info-item p {
+            font-size: 1rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .contact-info-item a {
+            color: var(--warm-green);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-info-item a:hover {
+            color: var(--deep-green);
+        }
+
+        .contact-form {
+            background: var(--cream);
+            border-radius: 20px;
+            padding: 45px;
+        }
+
+        .contact-form h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--deep-green);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--grey-text);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 2px solid var(--light-grey);
+            background: var(--white);
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--dark);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--soft-green);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0f1f16;
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer-about .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.8;
+            max-width: 320px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 25px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 14px;
+        }
+
+        .footer-col ul li a {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.25);
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--deep-green);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--warm-green);
+            transform: translateY(-3px);
+        }
+
+        .scroll-top svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--white);
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-close svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--white);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-grid {
+                gap: 50px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 350px;
+                height: 100vh;
+                background: var(--deep-green);
+                padding: 100px 40px 40px;
+                transition: right 0.4s ease;
+                box-shadow: -10px 0 40px rgba(0,0,0,0.3);
+            }
+
+            nav.open {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            nav ul li a {
+                font-size: 1.1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero-slogan {
+                font-size: 1rem;
+                letter-spacing: 4px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .mission-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-row: span 1;
+            }
+
+            .donate-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .hero-memorial {
+                font-size: 0.65rem;
+                letter-spacing: 3px;
+                padding: 8px 20px;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item h3 {
+                font-size: 2.2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+
+            .donate-amount {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container">
+            <a href="#accueil" class="logo">
+                <span class="logo-name">Ensemble pour L'Humain</span>
+                <span class="logo-slogan">Un Don, Un Sourire</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#hommage">Hommage</a></li>
+                    <li><a href="#mission">Mission</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#don" class="nav-cta">Faire un don</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <span class="hero-memorial">A la memoire de PAPA</span>
+            <h1>Ensemble pour <span class="highlight">L'Humain</span></h1>
+            <p class="hero-slogan">Un Don, Un Sourire</p>
+            <p>
+                Parce que chaque geste compte, nous perpetuons les valeurs de solidarite 
+                et de generosite. A Mbour, nous agissons concretement pour ceux qui en ont besoin.
+            </p>
+            <div class="hero-buttons">
+                <a href="#don" class="btn btn-primary">Faire un don</a>
+                <a href="#hommage" class="btn btn-outline">Decouvrir notre histoire</a>
+            </div>
+           <!-- <p class="hero-location">Mbour, Senegal</p> -->
+        </div>
+    </section>
+
+    <!-- ABOUT / HOMMAGE -->
+    <section class="about" id="hommage">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <div class="about-image-placeholder">
+                        <div class="placeholder-icon">
+                           <img src="C:\Users\DELL\Desktop\tout\FORPAPA\photo.jpg">
+                        </div>
+                       <!-- <span>Photo de PAPA</span> -->
+                    </div>
+                    <div class="about-image-accent"></div>
+                </div>
+                <div class="about-content fade-in">
+                    <span class="section-label">Notre histoire</span>
+                    <h2 class="section-title">A la memoire de PAPA</h2>
+                    <p class="section-subtitle">
+                        L'association "Ensemble pour L'Humain" est nee d'un desir profond 
+                        de perpetuer l'heritage de PAPA, un homme dont la generosite et 
+                        l'humanite ont touche de nombreuses vies a Mbour et au-dela.
+                    </p>
+                    <p class="section-subtitle" style="margin-top: 15px;">
+                        Fideles a ses valeurs, nous poursuivons son engagement envers les 
+                        plus vulnerables en organisant des actions de solidarite au coeur 
+                        de notre communaute.
+                    </p>
+                    <div class="about-values">
+                        <div class="about-value">
+                            <div class="about-value-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Generosite</h4>
+                                <p>Donner sans compter, comme PAPA l'a toujours fait.</p>
+                            </div>
+                        </div>
+                        <div class="about-value">
+                            <div class="about-value-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Solidarite</h4>
+                                <p>Etre ensemble, unis pour soutenir ceux qui en ont besoin.</p>
+                            </div>
+                        </div>
+                        <div class="about-value">
+                            <div class="about-value-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Action</h4>
+                                <p>Agir concretement sur le terrain, chaque jour, a Mbour.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission" id="mission">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Ce que nous faisons</span>
+                <h2 class="section-title">Nos actions sur le terrain</h2>
+                <p class="section-subtitle">
+                    Chaque action est une promesse tenue envers la memoire de PAPA. 
+                    Nous intervenons la ou le besoin se fait sentir.
+                </p>
+            </div>
+            <div class="mission-cards">
+                <div class="mission-card fade-in">
+                    <div class="mission-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8.1 13.34l2.83-2.83L3.91 3.5a4.008 4.008 0 000 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/></svg>
+                    </div>
+                    <h3>Distribution alimentaire</h3>
+                    <p>
+                        Nous organisons regulierement des distributions de denrees 
+                        alimentaires aux familles les plus demunies de Mbour et ses environs.
+                    </p>
+                </div>
+                <div class="mission-card fade-in">
+                    <div class="mission-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+                    </div>
+                    <h3>Aide aux familles</h3>
+                    <p>
+                        Soutien direct aux familles en difficulte par des dons materiels, 
+                        vestimentaires et un accompagnement humain.
+                    </p>
+                </div>
+                <div class="mission-card fade-in">
+                    <div class="mission-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                    </div>
+                    <h3>Education et soutien scolaire</h3>
+                    <p>
+                        Contribution a la scolarisation des enfants defavorises par la 
+                        fourniture de materiel scolaire et le financement d'inscriptions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <h3>200</h3>
+                    <p>Familles aidees</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>02</h3>
+                    <p>Distributions realisees</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>200</h3>
+                    <p>Benevoles engages</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>MBOUR</h3>
+                    <p>Notre ville d'action</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="galerie">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Nos moments</span>
+                <h2 class="section-title">Galerie</h2>
+                <p class="section-subtitle">
+                    Retrouvez en images nos actions sur le terrain, les distributions 
+                    et les sourires que nous avons pu apporter.
+                </p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Image 1 - Grande -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-placeholder-icon">
+                        <!--
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg> -->                    </div>
+                    <span class="gallery-placeholder-text">Photo 1</span>
+                   <img src="C:\Users\DELL\Desktop\tout\FORPAPA\photo_2026-03-28_13-08-40.jpg" alt="Distribution Mbour"> 
+                    <div class="gallery-overlay"><span>Distribution a Mbour</span></div>
+                </div>
+                <!-- Image 2 -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <span class="gallery-placeholder-text">Photo 2</span>
+                     <img src="photo_2026-03-28_13-08-46.jpg" alt="">
+                    <div class="gallery-overlay"><span>Action solidaire</span></div>
+                </div>
+                <!-- Image 3 -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <span class="gallery-placeholder-text">Photo 3</span>
+                  <img src="photo_2026-03-28_13-08-46.jpg" alt="">
+                    <div class="gallery-overlay"><span>Aide aux familles</span></div>
+                </div>
+                <!-- Image 4 -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <span class="gallery-placeholder-text">Photo 4</span>
+                    <img src="photo_2026-03-28_13-08-40.jpg" alt=""> 
+                    <div class="gallery-overlay"><span>Ensemble pour L'Humain</span></div>
+                </div>
+                <!-- Image 5 -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <span class="gallery-placeholder-text">Photo 5</span>
+                    <img src="photo_2026-03-28_13-08-46.jpg" alt="">
+                    <div class="gallery-overlay"><span>Un don, un sourire</span></div>
+                </div>
+                <!-- Image 6 -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <span class="gallery-placeholder-text">Photo 6</span>
+                    <img src="photo_2026-03-28_13-08-46.jpg" alt="">
+                    <div class="gallery-overlay"><span>For PAPA</span></div>
+                </div>
+                <!-- Image 7 -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <span class="gallery-placeholder-text">Photo 7</span>
+                    <img src="photo_2026-03-28_13-08-46.jpg" alt="">
+                    <div class="gallery-overlay"><span>Notre equipe</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--
+    <!- - DONATE -->
+    <!--
+    <section class="donate" id="don">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Contribuer</span>
+                <h2 class="section-title">Faire un don</h2>
+                <p class="section-subtitle">
+                    Chaque contribution, quelle que soit sa taille, fait une difference 
+                    reelle dans la vie des familles de Mbour.
+                </p>
+            </div>
+            <div class="donate-grid">
+                <div class="donate-card fade-in">
+                    <div class="donate-amount">500</div>
+                    <span class="donate-currency">FCFA</span>
+                    <p class="donate-desc">
+                        Un geste simple qui contribue a l'achat de denrees 
+                        alimentaires de base pour une famille.
+                    </p>
+                    <a href="tel:+221773964246" class="btn btn-primary">Donner 500 FCFA</a>
+                </div>
+                <div class="donate-card featured fade-in">
+                    <div class="donate-amount">5 000</div>
+                    <span class="donate-currency">FCFA</span>
+                    <p class="donate-desc">
+                        Permet de fournir un kit alimentaire complet 
+                        pour une famille pendant une semaine.
+                    </p>
+                    <a href="tel:+221773964246" class="btn btn-primary">Donner 5 000 FCFA</a>
+                </div>
+                <div class="donate-card fade-in">
+                    <div class="donate-amount">1 000</div>
+                    <span class="donate-currency">FCFA</span>
+                    <p class="donate-desc">
+                        Un soutien significatif pour financer une 
+                        action de distribution complete.
+                    </p>
+                    <a href="tel:+221773964246" class="btn btn-primary">Donner 1 000 FCFA</a>
+                </div>
+            </div>
+            <div class="donate-custom fade-in">
+                <p>Vous souhaitez donner un montant libre ?</p>
+                <div class="donate-custom-form">
+                    <input type="text" placeholder="Montant en FCFA" id="customAmount">
+                    <a href="tel:+221773964246" class="btn btn-primary">Contactez-nous</a>
+                </div>
+            </div>
+            <div class="donate-info fade-in">
+                <p>
+                    Pour effectuer votre don, contactez-nous directement par telephone au 
+                    <strong>+221 77 396 42 46</strong>. Nous vous guiderons sur les modalites 
+                    de transfert (Wave, Orange Money). Chaque franc compte.
+                </p>
+            </div>
+        </div>
+    </section>
+-->
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="fade-in">
+                    <span class="section-label">Nous joindre</span>
+                    <h2 class="section-title">Contactez-nous</h2>
+                    <p class="section-subtitle">
+                        Vous souhaitez nous rejoindre, faire un don ou en savoir plus 
+                        sur nos actions ? N'hesitez pas a nous contacter.
+                    </p>
+                    <div class="contact-info-list">
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>Mbour, Senegal</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Telephone</h4>
+                                <p><a href="tel:+221773964246">+221 77 396 42 46</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <div>
+                                <h4>Disponibilite</h4>
+                                <p>Tous les jours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <h3>Envoyez-nous un message</h3>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nom complet</label>
+                                <input type="text" id="name" placeholder="Votre nom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telephone</label>
+                                <input type="tel" id="phone" placeholder="Votre numero">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Votre adresse email">
+                        </div>
+                        <!--
+                        <div class="form-group">
+                            <label for="subject">Objet</label>
+                            <input type="text" id="subject" placeholder="Objet de votre message">
+                        </div>
+                        -->
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Ecrivez votre message ici..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <span class="logo-name">Ensemble pour L'Humain</span>
+                        <span class="logo-slogan">Un Don, Un Sourire</span>
+                    </div>
+                    <p>
+                        Association a la memoire de PAPA, dediee a la solidarite 
+                        et a l'entraide dans la ville de Mbour, au Senegal. 
+                        Chaque geste compte, chaque sourire est une victoire.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#hommage">Hommage</a></li>
+                        <li><a href="#mission">Mission</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Actions</h4>
+                    <ul>
+                        <li><a href="#don">Faire un don</a></li>
+                        <li><a href="#contact">Nous contacter</a></li>
+                        <li><a href="#mission">Devenir benevole</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+221773964246">+221 77 396 42 46</a></li>
+                        <li><a>Mbour, Senegal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Ensemble pour L'Humain. Tous droits reserves. For PAPA.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions legales</a>
+                    <a href="#">Politique de confidentialite</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCROLL TO TOP -->
+    <button class="scroll-top" id="scrollTop" aria-label="Retour en haut">
+        <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+    </button>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">
+            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+        <img src="" alt="" id="lightboxImg">
+    </div>
+
+    <script>
+        // ===== HEADER SCROLL =====
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ===== MOBILE MENU =====
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('open');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('open');
+            });
+        });
+
+        // ===== SCROLL TO TOP =====
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== FADE IN ANIMATION =====
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ===== GALLERY LIGHTBOX =====
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ===== FORM SUBMISSION =====
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            // Construct WhatsApp or SMS message
+            const text = `Bonjour, je suis ${name}. ${message} (Tel: ${phone})`;
+            const waLink = `https://wa.me/221773964246?text=${encodeURIComponent(text)}`;
+            window.open(waLink, '_blank');
+        });
+
+        // ===== SMOOTH REVEAL ON LOAD =====
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+
+</body>
+</html>
