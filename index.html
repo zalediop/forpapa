@@ -1974,14 +1974,20 @@
         // ===== FORM SUBMISSION =====
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const phoneField = document.getElementById('phone');
+            const phone = phoneField ? phoneField.value.trim() : '';
+            const message = document.getElementById('message').value.trim();
 
-            // Construct WhatsApp or SMS message
-            const text = `Bonjour, je suis ${name}. ${message} (Tel: ${phone})`;
+            const text = [
+                `Bonjour, je suis ${name}.`,
+                message,
+                phone ? `Mon numéro : ${phone}` : ''
+            ].filter(Boolean).join('\n\n');
             const waLink = `https://wa.me/221773203770?text=${encodeURIComponent(text)}`;
-            window.open(waLink, '_blank');
+
+            // Naviguer directement évite le blocage de la fenêtre par certains navigateurs mobiles.
+            window.location.href = waLink;
         });
 
         // ===== SMOOTH REVEAL ON LOAD =====
